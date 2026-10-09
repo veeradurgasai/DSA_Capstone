@@ -1,0 +1,8 @@
+# ============================================================
+# Local Secrets Configuration Template for MessageCentral VerifyNow
+# Copy this file to application-local.properties and enter your real credentials.
+# ============================================================
+
+MESSAGE_CENTRAL_CUSTOMER_ID=C-C0D85763CDFC41C
+MESSAGE_CENTRAL_EMAIL=your_messagecentral_email@domain.com
+MESSAGE_CENTRAL_KEY=your_messagecentral_key_or_password

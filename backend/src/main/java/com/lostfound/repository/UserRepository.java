@@ -1,0 +1,21 @@
+package com.lostfound.repository;
+
+import com.lostfound.entity.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
+    long countByRole(String role);
+    List<User> findByAccountStatus(String accountStatus);
+    List<User> findByRoleAndAccountStatus(String role, String accountStatus);
+    long countByAccountStatus(String accountStatus);
+}

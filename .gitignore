@@ -1,0 +1,40 @@
+# Target & Build Output
+target/
+dist/
+build/
+*.class
+*.jar
+*.war
+
+# Node Modules & Package Locks
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database & Local Files
+data/
+*.db
+*.log
+uploads/
+
+# Environment Variables & Local Secrets
+.env
+.env.local
+.env.*.local
+*.local.properties
+application-local.properties
+backend/application-local.properties
+secrets.properties
+backend/secrets.properties
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+Thumbs.db
