@@ -63,6 +63,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        new java.io.File("./data").mkdirs();
+        new java.io.File("./uploads").mkdirs();
+
         // Ensure the exact 15 campus locations are present
         if (locationRepository.findByNameIgnoreCase("Library").isEmpty()) {
             log.info("Migrating / Seeding exact 15 campus locations and graph edges...");
