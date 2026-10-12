@@ -55,7 +55,7 @@ export function FoundItemsPage() {
       </div>
 
       {/* Filter and Trie Autocomplete Bar */}
-      <div className="card" style={{ marginBottom: '2rem', padding: '1.25rem' }}>
+      <div className="card filter-bar-card" style={{ marginBottom: '2rem', padding: '1.25rem', position: 'relative', zIndex: 100 }}>
         <form onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'flex-end' }}>
           <div>
             <label className="form-label">Trie Autocomplete Search</label>

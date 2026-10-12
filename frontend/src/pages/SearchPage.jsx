@@ -50,7 +50,7 @@ export function SearchPage() {
         </p>
       </div>
 
-      <div className="card" style={{ marginBottom: '2rem', padding: '1.25rem' }}>
+      <div className="card search-filter-card" style={{ marginBottom: '2rem', padding: '1.25rem', position: 'relative', zIndex: 100 }}>
         <form onSubmit={handleSearchSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', alignItems: 'flex-end' }}>
           <div>
             <label className="form-label">Keyword (Trie Autocomplete)</label>

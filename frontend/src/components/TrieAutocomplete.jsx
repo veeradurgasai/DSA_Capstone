@@ -54,7 +54,7 @@ export function TrieAutocomplete({ value, onChange, onSelect, placeholder = 'Sea
 
       {showDropdown && suggestions.length > 0 && (
         <ul className="autocomplete-dropdown">
-          <li style={{ padding: '0.4rem 0.9rem', fontSize: '0.72rem', color: 'var(--text-muted)', background: '#f8fafc', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <li style={{ padding: '0.45rem 0.9rem', fontSize: '0.72rem', color: 'var(--text-muted)', background: 'rgba(11, 31, 51, 0.95)', borderBottom: '1px solid var(--glass-border)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             ⚡ Trie Prefix Suggestions
           </li>
           {suggestions.map((word, idx) => (
