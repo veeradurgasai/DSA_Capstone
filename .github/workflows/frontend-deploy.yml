@@ -39,6 +39,7 @@ jobs:
           npm run build
           cp dist/index.html dist/404.html
         env:
+          VITE_BASE_PATH: '/DSA_Capstone/'
           VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://lost-found-backend.onrender.com/api' }}
 
       - name: Deploy to gh-pages branch (Branch Deployment Support)

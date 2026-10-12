@@ -73,9 +73,13 @@ async function request(endpoint, options = {}) {
 
     return data;
   } catch (error) {
-    // Catch fetch network errors (e.g. backend down or unreachable)
-    if (error.name === 'TypeError' && (error.message.includes('fetch') || error.message.includes('NetworkError') || error.message.includes('Failed'))) {
-      const friendlyError = new Error('Unable to connect to the server. Please verify the backend server is running on http://localhost:8080.');
+    if (error.name === 'TypeError' && (error.message.includes('fetch') || error.message.includes('NetworkError') || error.message.includes('Failed') || error.message.includes('Failed to fetch'))) {
+      const isLocal = BASE_URL.includes('localhost') || BASE_URL.includes('127.0.0.1');
+      const friendlyError = new Error(
+        isLocal
+          ? `Unable to connect to the backend server (${BASE_URL}). Please ensure the Spring Boot server is running on port 8080.`
+          : `Unable to connect to the backend service (${BASE_URL}). If hosted on a free tier (e.g., Render), the instance may be spinning up from standby. Please retry in 30-60 seconds.`
+      );
       friendlyError.status = 0;
       friendlyError.originalError = error;
       console.error(`[API Network Error] Could not reach ${url}:`, error.message);
