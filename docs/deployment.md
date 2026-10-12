@@ -61,21 +61,30 @@ The repository includes a multi-stage `Dockerfile` in the root and in `backend/`
 
 ## 3. Frontend Deployment (GitHub Pages)
 
-### 3.1 Automated GitHub Actions
+### 3.1 Activating GitHub Pages in Repository Settings (Crucial Step)
+By default, GitHub Pages is set to "Deploy from a branch (main)", which will only show the raw README.md instead of your React website. To show the actual compiled React web application:
+1. Open your repository on GitHub: `veeradurgasai/DSA_Capstone`.
+2. Go to **Settings > Pages** (in the left sidebar).
+3. Under **Build and deployment > Source**:
+   - **Recommended**: Select **GitHub Actions** from the dropdown.
+   - **Alternative**: Select **Deploy from a branch**, choose branch **gh-pages**, folder **/(root)**, and click **Save**.
+
+### 3.2 Automated GitHub Actions Workflow
 The repository includes `.github/workflows/frontend-deploy.yml`. When changes are pushed to `main`, GitHub Actions automatically:
 1. Checks out the repository.
 2. Installs dependencies (`npm ci` inside `frontend/`).
 3. Compiles the production bundle (`npm run build`).
-4. Deploys to GitHub Pages.
+4. Generates `.nojekyll` and `404.html` SPA routing fallbacks.
+5. Deploys the built assets directly to GitHub Pages and updates the `gh-pages` branch.
 
-### 3.2 Connecting Frontend to Your Deployed Backend
+### 3.3 Connecting Frontend to Your Deployed Backend
 To link your deployed GitHub Pages frontend to your deployed backend:
 1. Go to your GitHub repository: `veeradurgasai/DSA_Capstone`.
 2. Click **Settings > Secrets and variables > Actions**.
 3. Add a **New repository secret**:
    - **Name**: `VITE_API_URL`
    - **Value**: `https://your-backend-service.onrender.com/api` (replace with your actual Render URL ending in `/api`)
-4. Re-run the GitHub Pages deployment workflow.
+4. Re-run the GitHub Pages deployment workflow in the **Actions** tab.
 
 ---
 

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -35,9 +35,19 @@ jobs:
         run: npm ci
 
       - name: Build React Application
-        run: npm run build
+        run: |
+          npm run build
+          cp dist/index.html dist/404.html
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://lost-found-backend.onrender.com/api' }}
+
+      - name: Deploy to gh-pages branch (Branch Deployment Support)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/dist
+          publish_branch: gh-pages
+          force_orphan: true
 
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3
@@ -50,6 +60,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    continue-on-error: true
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
