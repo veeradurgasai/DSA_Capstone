@@ -20,7 +20,7 @@ export function Footer() {
           <span className="footer-tag">MaxHeap Ranking O(log n)</span>
           <span className="footer-tag">MergeSort O(n log n)</span>
           <span className="footer-tag">Dijkstra Shortest Path</span>
-          <span className="footer-tag">BFS/DFS Traversals</span>
+          <span className="footer-tag">Campus Graph Network</span>
         </div>
       </div>
       <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--text-dim)', borderTop: '1px solid var(--glass-border)', paddingTop: '1rem' }}>

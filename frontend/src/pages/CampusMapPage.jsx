@@ -7,7 +7,6 @@ export function CampusMapPage() {
   const [fromId, setFromId] = useState('');
   const [toId, setToId] = useState('');
   const [routeResult, setRouteResult] = useState(null);
-  const [traversalResult, setTraversalResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -34,40 +33,11 @@ export function CampusMapPage() {
   const handleCalculateShortestPath = async () => {
     if (!fromId || !toId) return;
     setLoading(true);
-    setTraversalResult(null);
     try {
       const res = await campusService.getShortestPath(fromId, toId);
       setRouteResult(res);
     } catch (err) {
       alert(err.message || 'Error running Dijkstra shortest path.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRunBfs = async () => {
-    if (!fromId) return;
-    setLoading(true);
-    setRouteResult(null);
-    try {
-      const res = await campusService.runBfs(fromId);
-      setTraversalResult(res);
-    } catch (err) {
-      alert(err.message || 'Error running BFS.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRunDfs = async () => {
-    if (!fromId) return;
-    setLoading(true);
-    setRouteResult(null);
-    try {
-      const res = await campusService.runDfs(fromId);
-      setTraversalResult(res);
-    } catch (err) {
-      alert(err.message || 'Error running DFS.');
     } finally {
       setLoading(false);
     }
@@ -101,7 +71,7 @@ export function CampusMapPage() {
           Campus Graph & Shortest Route Navigator
         </h1>
         <p style={{ color: 'var(--text-muted)' }}>
-          Real-time algorithmic campus navigation powered by custom Java Graph algorithms: Dijkstra's Algorithm, Breadth-First Search (BFS), and Depth-First Search (DFS).
+          Real-time algorithmic campus navigation powered by custom Java Dijkstra's Shortest Path algorithm across 15 official campus locations.
         </p>
       </div>
 
@@ -127,14 +97,8 @@ export function CampusMapPage() {
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <button onClick={handleCalculateShortestPath} className="btn btn-3d-glass" disabled={loading}>
-              🚶 Dijkstra Path
-            </button>
-            <button onClick={handleRunBfs} className="btn btn-neon-border" disabled={loading}>
-              🌊 Run BFS
-            </button>
-            <button onClick={handleRunDfs} className="btn btn-neon-border" disabled={loading}>
-              🌲 Run DFS
+            <button onClick={handleCalculateShortestPath} className="btn btn-3d-glass" disabled={loading} style={{ width: '100%' }}>
+              🚶 Find Shortest Route (Dijkstra)
             </button>
           </div>
         </div>
@@ -279,21 +243,6 @@ export function CampusMapPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Traversal Result Box (BFS / DFS) */}
-      {traversalResult && (
-        <div className="card" style={{ borderLeft: '5px solid var(--ice-glass)' }}>
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#FFFFFF' }}>
-            {traversalResult.algorithm} Graph Traversal from: {traversalResult.startNodeName}
-          </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-            Nodes visited in order using queue/stack based exploration:
-          </p>
-          <div style={{ background: 'rgba(7, 21, 33, 0.75)', border: '1px solid var(--glass-border)', padding: '1rem', borderRadius: 'var(--radius-md)', fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: 'var(--ice-glass)', fontWeight: 700 }}>
-            {traversalResult.visitedNodes?.join(' ➔ ')}
           </div>
         </div>
       )}
